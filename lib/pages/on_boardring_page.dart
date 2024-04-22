@@ -38,4 +38,3 @@ class _OnBoardringPageState extends State<OnBoardringPage> {
     );
   }
 }
-

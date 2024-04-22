@@ -17,11 +17,13 @@ class OnBoardringPageBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: size.height * .135,
+      height: size.height * .14,
       width: size.width,
-      color: kPrimaryColor,
+      decoration: BoxDecoration(
+          color: kPrimaryColor, boxShadow: [BoxShadow(color: kPrimaryColor)]),
       child: Column(
         children: [
+          SizedBox(height: size.width * .06),
           CustomSmoothPageIndicator(controller: controller, size: size),
           SizedBox(height: size.width * .06),
           CustomBottom(
