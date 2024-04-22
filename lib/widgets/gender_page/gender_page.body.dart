@@ -1,5 +1,5 @@
 import 'package:app/constants.dart';
-import 'package:app/widgets/custom_bottom.dart';
+import 'package:app/utils/widget/custom_bottom.dart';
 import 'package:app/widgets/gender_page/gender_stack.dart';
 import 'package:flutter/material.dart';
 

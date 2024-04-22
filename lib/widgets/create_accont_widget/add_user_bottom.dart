@@ -4,7 +4,7 @@ import 'package:app/cubit/pick_image/pick_image_state.dart';
 import 'package:app/cubit/upload/upload_image/upload_image_cubit.dart';
 import 'package:app/cubit/user_date/store_user_date/store_user_date_cubit.dart';
 import 'package:app/pages/create_account/verificaton_page.dart';
-import 'package:app/widgets/custom_bottom.dart';
+import 'package:app/utils/widget/custom_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;

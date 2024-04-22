@@ -1,7 +1,7 @@
 import 'package:app/constants.dart';
 import 'package:app/pages/login_page.dart';
 import 'package:app/pages/register_page.dart';
-import 'package:app/widgets/custom_bottom.dart';
+import 'package:app/utils/widget/custom_bottom.dart';
 import 'package:flutter/material.dart';
 
 class FirstPageBody extends StatelessWidget {

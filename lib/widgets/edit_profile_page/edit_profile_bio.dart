@@ -2,7 +2,7 @@ import 'package:app/constants.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/update_user_data/update_user_cubit_cubit.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/custom_bottom.dart';
+import 'package:app/utils/widget/custom_bottom.dart';
 import 'package:app/widgets/edit_profile_page/edit_profile_bio_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

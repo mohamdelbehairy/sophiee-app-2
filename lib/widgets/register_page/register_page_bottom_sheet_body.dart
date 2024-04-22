@@ -3,7 +3,7 @@ import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/auth/register/register_cubit.dart';
 import 'package:app/utils/widget/auth/auth_bottom_sheet_top_text.dart';
 import 'package:app/utils/widget/auth/text_field_confirm_password.dart';
-import 'package:app/widgets/custom_bottom.dart';
+import 'package:app/utils/widget/custom_bottom.dart';
 import 'package:app/utils/widget/auth/text_field_email.dart';
 import 'package:app/utils/widget/auth/text_field_password.dart';
 import 'package:app/widgets/register_page/custom_text_bottom_sheet_read_and_agree.dart';

@@ -1,8 +1,7 @@
 import 'package:app/custom_material_app.dart';
-import 'package:app/utils/update_user_online.dart';
 import 'package:app/firebase_options.dart';
 import 'package:app/pages/home_page.dart';
-import 'package:app/pages/register_page.dart';
+import 'package:app/pages/on_boardring_page.dart';
 import 'package:app/services/theme.dart';
 import 'package:app/simple_observe_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -28,7 +27,7 @@ _init() async {
     // UpdateUserOnline.checkOnline();
     return runApp(MyApp(screen: HomePage()));
   } else {
-    return runApp(MyApp(screen: RegisterPage()));
+    return runApp(MyApp(screen: OnBoardringPage()));
   }
 }
 

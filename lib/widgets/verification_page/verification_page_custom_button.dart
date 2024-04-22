@@ -1,6 +1,6 @@
 import 'package:app/cubit/auth/auth_settings/auth_settings_cubit.dart';
 import 'package:app/utils/widget/show_top_snack_bar/show_top_snack_bar_success.dart';
-import 'package:app/widgets/custom_bottom.dart';
+import 'package:app/utils/widget/custom_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
