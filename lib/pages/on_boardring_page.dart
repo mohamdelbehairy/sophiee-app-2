@@ -24,17 +24,16 @@ class _OnBoardringPageState extends State<OnBoardringPage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: kPrimaryColor,
-      body: OnBoardringPageBody(
-          controller: controller,
-          size: size,
-          onPageChanged: (value) {
-            setState(() {
-              isLastPage = value == 2;
-            });
-          }),
-      bottomSheet: OnBoardringPageBottomSheet(
-          size: size, controller: controller, isLastPage: isLastPage),
-    );
+        backgroundColor: kPrimaryColor,
+        body: OnBoardringPageBody(
+            controller: controller,
+            size: size,
+            onPageChanged: (value) {
+              setState(() {
+                isLastPage = value == 2;
+              });
+            }),
+        bottomSheet: OnBoardringPageBottomSheet(
+            size: size, controller: controller, isLastPage: isLastPage));
   }
 }

@@ -18,3 +18,6 @@ const onBoardringPageImageOne = 'assets/images/on-boardring-page-1.png';
 const onBoardringPageImageTwo = 'assets/images/on-boardring-page-2.png';
 const onBoardringPageOneImageThree = 'assets/images/on-boardring-page-3.png';
 
+const providerAuthPageImage = 'assets/images/provider-auth.png';
+
+const googleIcon = 'assets/images/google-icon.png';

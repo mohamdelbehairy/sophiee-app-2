@@ -1,7 +1,9 @@
 import 'package:app/constants.dart';
+import 'package:app/pages/auth/provider_auth_page.dart';
 import 'package:app/utils/widget/custom_bottom.dart';
 import 'package:app/widgets/on_boardring_page/custom_smooth_page_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart' as getnav;
 
 class OnBoardringPageBottomSheet extends StatelessWidget {
   const OnBoardringPageBottomSheet(
@@ -32,6 +34,8 @@ class OnBoardringPageBottomSheet extends StatelessWidget {
               colorText: kPrimaryColor,
               onPressed: () {
                 if (isLastPage) {
+                  getnav.Get.to(() => ProviderAuthPage(size: size),
+                      transition: getnav.Transition.rightToLeft);
                 } else {
                   controller.nextPage(
                       duration: const Duration(milliseconds: 500),
