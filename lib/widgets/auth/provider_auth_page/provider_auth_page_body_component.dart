@@ -1,8 +1,10 @@
 import 'package:app/constants.dart';
-import 'package:app/widgets/auth/provider_auth_page/custom_divider.dart';
+import 'package:app/widgets/auth/provider_auth_page/continue_with_email.dart';
 import 'package:app/widgets/auth/provider_auth_page/custom_provider_way.dart';
 import 'package:app/widgets/auth/provider_auth_page/custom_text.dart';
+import 'package:app/widgets/auth/provider_auth_page/provider_divider.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProviderAuthPageBodyComponent extends StatelessWidget {
   const ProviderAuthPageBodyComponent({super.key, required this.size});
@@ -20,6 +22,12 @@ class ProviderAuthPageBodyComponent extends StatelessWidget {
           CustomProviderWay(
               size: size,
               top: size.width * .05,
+              text: 'Continue with Facebook',
+              onTap: () {},
+              widget: Icon(FontAwesomeIcons.facebook, color: Colors.blue)),
+          CustomProviderWay(
+              size: size,
+              top: size.width * .03,
               text: 'Continue with Google',
               onTap: () {},
               widget: Image.asset(googleIcon, width: size.height * .03)),
@@ -30,17 +38,11 @@ class ProviderAuthPageBodyComponent extends StatelessWidget {
               onTap: () {},
               widget: Icon(Icons.phone, color: Colors.teal.shade700)),
           SizedBox(height: size.width * .06),
-          Row(
-            children: [
-              ProviderAuthPageCustomDivider(
-                  size: size, left: size.width * .095, right: size.width * .03),
-              Text('or'),
-              ProviderAuthPageCustomDivider(
-                  size: size, left: size.width * .03, right: size.width * .08),
-            ],
-          )
+          ProviderDivider(size: size),
+          ContinueWithEmail(size: size)
         ],
       ),
     );
   }
 }
+

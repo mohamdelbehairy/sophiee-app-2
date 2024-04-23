@@ -30,8 +30,7 @@ class LoginPageBody extends StatelessWidget {
         AuthPositionedIcon(
             top: 50,
             left: 0,
-            onPressed: () => getnav.Get.to(() => RegisterPage(),
-                transition: getnav.Transition.rightToLeft),
+            onPressed: () => Navigator.pop(context),
             child: const Icon(Icons.arrow_back_sharp,
                 size: 30, color: Colors.white)),
         LoginPageBottomSheet(isDark: isDark),

@@ -24,7 +24,7 @@ class CustomProviderWay extends StatelessWidget {
         margin: EdgeInsets.only(
             right: size.width * .08, left: size.width * .08, top: top),
         decoration: BoxDecoration(
-            // color: Colors.white,
+            color: Colors.white,
             border: Border.all(color: Colors.white.withOpacity(.3)),
             borderRadius: BorderRadius.circular(12)),
         child: Row(
@@ -34,8 +34,8 @@ class CustomProviderWay extends StatelessWidget {
             SizedBox(width: size.width * .015),
             Text(text,
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: size.height * .018,
+                    color: Colors.black,
+                    fontSize: size.height * .016,
                     fontWeight: FontWeight.w100))
           ],
         ),
