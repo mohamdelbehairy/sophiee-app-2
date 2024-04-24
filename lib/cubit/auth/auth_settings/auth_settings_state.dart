@@ -9,7 +9,9 @@ final class AuthSettingsLoading extends AuthSettingsState {}
 
 final class ResetPasswordSuccess extends AuthSettingsState {}
 
-final class SignOutSuccess extends AuthSettingsState {}
+final class EmailSignOutSuccess extends AuthSettingsState {}
+
+final class GoogleSignOutSuccess extends AuthSettingsState {}
 
 final class VerificationEmailSuccess extends AuthSettingsState {}
 

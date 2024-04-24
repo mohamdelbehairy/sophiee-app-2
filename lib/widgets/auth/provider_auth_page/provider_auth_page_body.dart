@@ -3,12 +3,11 @@ import 'package:app/widgets/auth/provider_auth_page/provider_auth_page_body_comp
 import 'package:flutter/material.dart';
 
 class ProviderAuthPageBody extends StatelessWidget {
-  const ProviderAuthPageBody({super.key, required this.size});
-
-  final Size size;
+  const ProviderAuthPageBody({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Container(
         height: size.height,
         width: size.width,
@@ -25,4 +24,3 @@ class ProviderAuthPageBody extends StatelessWidget {
         child: ProviderAuthPageBodyComponent(size: size));
   }
 }
-

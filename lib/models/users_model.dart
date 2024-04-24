@@ -13,6 +13,8 @@ class UserModel {
   final DateTime onlineStatue;
   final bool isStory;
   Map<String, dynamic>? lastMessage;
+  bool? isGoogleAuth;
+  bool? isEmailAuth;
 
   UserModel({
     required this.userName,
@@ -27,6 +29,8 @@ class UserModel {
     required this.dateOfBirth,
     required this.isStory,
     this.lastMessage,
+    this.isGoogleAuth,
+    this.isEmailAuth
   });
 
   factory UserModel.fromJson(jsonData) {
@@ -43,6 +47,8 @@ class UserModel {
       onlineStatue: (jsonData['onlineStatue'] ?? Timestamp.now()).toDate(),
       isStory: jsonData['isStory'] ?? false,
       lastMessage: jsonData['lastMessage'],
+      isGoogleAuth:jsonData['isGoogleAuth'],
+      isEmailAuth:jsonData['isEmailAuth']
     );
   }
   Map<String, dynamic> toMap() {
@@ -59,6 +65,8 @@ class UserModel {
       'onlineStatue': onlineStatue,
       'isStory': isStory,
       // 'lastMessage': lastMessage,
+      'isGoogleAuth':isGoogleAuth,
+      'isEmailAuth':isEmailAuth
     };
   }
 

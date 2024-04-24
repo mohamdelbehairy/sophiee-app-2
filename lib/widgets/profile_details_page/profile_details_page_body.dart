@@ -7,6 +7,7 @@ import 'package:app/utils/widget/custom_tab_bar_item.dart';
 import 'package:app/widgets/profile_details_page/profile_details_page_app_bar.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ProfileDetailsPageBody extends StatefulWidget {
   ProfileDetailsPageBody(
       {super.key, required this.size, required this.user, required this.index});

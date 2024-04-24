@@ -1,9 +1,11 @@
 import 'package:app/constants.dart';
 import 'package:app/cubit/auth/auth_settings/auth_settings_cubit.dart';
+import 'package:app/cubit/auth/google_auth/google_auth_cubit.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_state.dart';
-import 'package:app/pages/login_page.dart';
+import 'package:app/models/users_model.dart';
+import 'package:app/pages/auth/provider_auth_page.dart';
 import 'package:app/widgets/settings/custom_items_two.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +13,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart' as getnav;
 
 class CustomCardTwo extends StatefulWidget {
-  const CustomCardTwo({super.key});
+  const CustomCardTwo({super.key, required this.size, required this.user});
+  final Size size;
+  final UserModel user;
 
   @override
   State<CustomCardTwo> createState() => _CustomCardTwoState();
@@ -21,8 +25,16 @@ class _CustomCardTwoState extends State<CustomCardTwo> {
   bool showProgressIndicator = false;
 
   void logOut() {
-    context.read<AuthSettingsCubit>().signOut();
-    getnav.Get.to(() => LoginPage(), transition: getnav.Transition.leftToRight);
+    var signOut = context.read<AuthSettingsCubit>();
+    if (widget.user.isGoogleAuth!) {
+      signOut.googleSignOut();
+      context.read<GoogleAuthCubit>().isLoading = false;
+    } else {
+      signOut.emailSignOut();
+    }
+
+    getnav.Get.to(() => ProviderAuthPage(),
+        transition: getnav.Transition.leftToRight);
   }
 
   void onTap() async {
@@ -36,7 +48,7 @@ class _CustomCardTwoState extends State<CustomCardTwo> {
   Widget build(BuildContext context) {
     return BlocListener<AuthSettingsCubit, AuthSettingsState>(
       listener: (context, state) {
-        if (state is SignOutSuccess) {
+        if (state is EmailSignOutSuccess || state is GoogleSignOutSuccess) {
           context.read<GetFriendsCubit>().emit(GetFriendsInitial());
         }
       },

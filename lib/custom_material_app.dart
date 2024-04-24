@@ -1,5 +1,6 @@
 import 'package:app/cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 import 'package:app/cubit/auth/auth_settings/auth_settings_cubit.dart';
+import 'package:app/cubit/auth/google_auth/google_auth_cubit.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/chat_high_lights/chat_high_light_message/chat_high_light_message_cubit.dart';
 import 'package:app/cubit/chat_high_lights/update_chat_high_light/update_chat_high_light_cubit.dart';
@@ -113,7 +114,8 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => UpdateChatHighLightCubit()),
         BlocProvider(create: (context) => ChatHighLightMessageCubit()),
         BlocProvider(create: (context) => AuthSettingsCubit()),
-        BlocProvider(create: (context) => StoreUserDateCubit())
+        BlocProvider(create: (context) => StoreUserDateCubit()),
+        BlocProvider(create: (context) => GoogleAuthCubit())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

@@ -14,9 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   Bloc.observer = SimpleBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await _init();
 }
 
@@ -52,3 +50,20 @@ class MyApp extends StatelessWidget {
         systemNavigationBarIconBrightness: Brightness.light));
   }
 }
+
+// _init() async {
+//   SharedPreferences prefs = await SharedPreferences.getInstance();
+//   final token = prefs.getString('userID');
+//   final isFirstTimeUser = prefs.getBool('isFirstTimeUser') ?? true;
+
+//   if (isFirstTimeUser) {
+//     prefs.setBool('isFirstTimeUser', false);
+//     return runApp(MyApp(screen: OnBoardringPage()));
+//   } else {
+//     if (token != null && FirebaseAuth.instance.currentUser!.emailVerified) {
+//       return runApp(MyApp(screen: HomePage()));
+//     } else {
+//       return runApp(MyApp(screen: ProviderAuthPage()));
+//     }
+//   }
+// }
