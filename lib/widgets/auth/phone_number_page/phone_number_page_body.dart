@@ -1,5 +1,6 @@
 import 'package:app/widgets/auth/phone_number_page/custom_phone_number_button.dart';
 import 'package:app/widgets/auth/phone_number_page/custom_phone_number_image.dart';
+import 'package:app/widgets/auth/phone_number_page/custom_phone_number_text.dart';
 import 'package:app/widgets/auth/phone_number_page/custom_phone_number_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -30,6 +31,7 @@ class _PhoneNumberPageBodyState extends State<PhoneNumberPageBody> {
       child: SingleChildScrollView(
         child: Column(children: [
           CustomPhoneNumberImage(size: widget.size),
+          CustomPhoneNumberText(size: widget.size),
           CustomPhoneNumberTextField(
               size: widget.size,
               controller: controller,

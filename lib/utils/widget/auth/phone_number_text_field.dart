@@ -28,6 +28,7 @@ class PhoneNumberTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(size.width * .02),
           child: IntlPhoneField(
               onChanged: onChanged,
+              initialCountryCode: 'EG',
               disableLengthCheck: disableLengthCheck,
               controller: phoneNumber,
               dropdownIcon: Icon(Icons.expand_more, color: dropDownColor),
