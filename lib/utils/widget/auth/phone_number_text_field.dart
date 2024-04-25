@@ -8,14 +8,17 @@ class PhoneNumberTextField extends StatelessWidget {
       required this.size,
       required this.hintText,
       required this.dropDownColor,
-      required this.phoneNumber,
-      required this.disableLengthCheck, required this.onChanged});
+      this.phoneNumber,
+      required this.disableLengthCheck,
+      required this.onChanged,
+      required this.fillColor});
   final Size size;
   final String hintText;
   final Color dropDownColor;
-  final TextEditingController phoneNumber;
+  final TextEditingController? phoneNumber;
   final bool disableLengthCheck;
   final Function(PhoneNumber) onChanged;
+  final Color fillColor;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,7 @@ class PhoneNumberTextField extends StatelessWidget {
       child: ClipRRect(
           borderRadius: BorderRadius.circular(size.width * .02),
           child: IntlPhoneField(
-            onChanged: onChanged,
+              onChanged: onChanged,
               disableLengthCheck: disableLengthCheck,
               controller: phoneNumber,
               dropdownIcon: Icon(Icons.expand_more, color: dropDownColor),
@@ -41,7 +44,7 @@ class PhoneNumberTextField extends StatelessWidget {
                       fontWeight: FontWeight.w100,
                       fontSize: size.width * .035),
                   filled: true,
-                  fillColor: const Color(0xff2b2c33).withOpacity(.035)))),
+                  fillColor: fillColor))),
     );
   }
 }

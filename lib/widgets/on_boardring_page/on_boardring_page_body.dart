@@ -21,19 +21,19 @@ class OnBoardringPageBody extends StatelessWidget {
       children: [
         OnBoardringPageItem(
             size: size,
-            imageUrl: onBoardringPageImageOne,
+            imageUrl: onBoardringPageImageOneUrl,
             title: 'Discover New Friends',
             subTitle:
                 'Encourage users to explore and meet new people\n Get ready for a new adventure! Explore a world\n full of opportunities to connect with\n new friend'),
         OnBoardringPageItem(
             size: size,
-            imageUrl: onBoardringPageImageTwo,
+            imageUrl: onBoardringPageImageTwoUrl,
             title: 'Enjoy private conversation',
             subTitle:
                 'Emphasize the privacy and security of messaging \n Implementing strong end-to-end encryption can\n safeguard messages so that only the intended \nrecipients can access and decipher them'),
         OnBoardringPageItem(
             size: size,
-            imageUrl: onBoardringPageOneImageThree,
+            imageUrl: onBoardringPageOneImageThreeUrl,
             title: 'Join Groups',
             subTitle:
                 'Promote group chats and community engagement \n  Enhanced Interaction Group chats enable multiple\n      users to participate in conversations, encouraging\n lively discussions and exchanges of ideas \nwithin a community setting'),

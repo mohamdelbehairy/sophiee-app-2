@@ -3,6 +3,7 @@ import 'package:app/widgets/auth/provider_auth_page/continue_with_email.dart';
 import 'package:app/widgets/auth/provider_auth_page/custom_provider_way.dart';
 import 'package:app/widgets/auth/provider_auth_page/custom_text.dart';
 import 'package:app/widgets/auth/provider_auth_page/google_auth_way.dart';
+import 'package:app/widgets/auth/provider_auth_page/phone_number_auth_way.dart';
 import 'package:app/widgets/auth/provider_auth_page/provider_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -18,7 +19,7 @@ class ProviderAuthPageBodyComponent extends StatelessWidget {
       padding: EdgeInsets.only(top: size.height * .1),
       child: Column(
         children: [
-          Image.asset(providerAuthPageImage,
+          Image.asset(providerAuthPageImageUrl,
               fit: BoxFit.cover, height: size.height * .35),
           ProviderAuthPageCustomtext(size: size),
           CustomProviderWay(
@@ -29,13 +30,7 @@ class ProviderAuthPageBodyComponent extends StatelessWidget {
               onTap: () {},
               widget: Icon(FontAwesomeIcons.facebook, color: Colors.blue)),
           GoogleAuthWay(size: size),
-          CustomProviderWay(
-              isLoading: false,
-              size: size,
-              top: size.width * .03,
-              text: 'Continue with Phone',
-              onTap: () {},
-              widget: Icon(Icons.phone, color: Colors.teal.shade700)),
+          PhoneNumberAuthWay(size: size),
           SizedBox(height: size.width * .06),
           ProviderDivider(size: size),
           ContinueWithEmail(size: size)

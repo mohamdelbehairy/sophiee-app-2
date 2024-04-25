@@ -1,10 +1,13 @@
-import 'package:app/widgets/create_accont_widget/phone_number_text_field.dart';
+import 'package:app/utils/widget/auth/phone_number_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/phone_number.dart';
 
 class AddUserPhoneNumber extends StatefulWidget {
   const AddUserPhoneNumber(
-      {super.key, required this.size, required this.phoneNumber, required this.onChanged});
+      {super.key,
+      required this.size,
+      required this.phoneNumber,
+      required this.onChanged});
 
   final Size size;
   final TextEditingController phoneNumber;
@@ -46,6 +49,7 @@ class _AddUserPhoneNumberState extends State<AddUserPhoneNumber> {
         hintText: 'Phone Number',
         dropDownColor: iconColor,
         disableLengthCheck: disableLengthCheck,
-        onChanged: widget.onChanged);
+        onChanged: widget.onChanged,
+        fillColor: const Color(0xff2b2c33).withOpacity(.035));
   }
 }
