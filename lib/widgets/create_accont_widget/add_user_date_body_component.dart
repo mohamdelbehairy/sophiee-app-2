@@ -20,7 +20,8 @@ class AddUserDataPageBodyComponent extends StatefulWidget {
       required this.dateOfBirth,
       required this.email,
       required this.phoneNumber,
-      required this.gender});
+      required this.gender,
+      required this.isLoading});
 
   final GlobalKey<FormState> globalKey;
   final CustomAddUserDataPageBody widget;
@@ -31,6 +32,7 @@ class AddUserDataPageBodyComponent extends StatefulWidget {
   final TextEditingController email;
   final TextEditingController phoneNumber;
   final TextEditingController gender;
+  final bool isLoading;
 
   @override
   State<AddUserDataPageBodyComponent> createState() =>
@@ -48,21 +50,33 @@ class _AddUserDataPageBodyComponentState
         child: Column(
           children: [
             AddUserProfileImage(
-                size: widget.widget.size, pickImage: widget.widget.pickImage),
+                enabled: !widget.isLoading,
+                size: widget.widget.size,
+                pickImage: widget.widget.pickImage),
             AddUserFullName(
-                size: widget.widget.size, fullName: widget.fullName),
+                enabled: !widget.isLoading,
+                size: widget.widget.size,
+                fullName: widget.fullName),
             AddUserTextField(
+                enabled: !widget.isLoading,
                 size: widget.widget.size,
                 hintText: 'Nick Name',
                 controller: widget.nickName),
             AddUserTextField(
+                enabled: !widget.isLoading,
                 size: widget.widget.size,
                 hintText: 'Bio',
                 controller: widget.bio),
             AddUserDateOfBirth(
-                size: widget.widget.size, dateOfBirth: widget.dateOfBirth),
-            AddUserEmail(size: widget.widget.size, email: widget.email),
+                enabled: !widget.isLoading,
+                size: widget.widget.size,
+                dateOfBirth: widget.dateOfBirth),
+            AddUserEmail(
+                enabled: !widget.isLoading,
+                size: widget.widget.size,
+                email: widget.email),
             AddUserPhoneNumber(
+              enabled: !widget.isLoading,
               size: widget.widget.size,
               phoneNumber: widget.phoneNumber,
               onChanged: (value) {
@@ -74,8 +88,12 @@ class _AddUserDataPageBodyComponentState
                 });
               },
             ),
-            AddUserGender(size: widget.widget.size, gender: widget.gender),
+            AddUserGender(
+                enabled: widget.isLoading,
+                size: widget.widget.size,
+                gender: widget.gender),
             AddUserBottom(
+                isLoading: widget.isLoading,
                 phoneNumber: phone,
                 pickImage: widget.widget.pickImage,
                 storeUserDate: widget.widget.storeUserDate,

@@ -24,7 +24,7 @@ class AddUserBottom extends StatelessWidget {
       required this.uploadImage,
       required this.pickImage,
       required this.phoneNumber,
-      required this.phoneController});
+      required this.phoneController, required this.isLoading});
 
   final GlobalKey<FormState> globalKey;
   final Size size;
@@ -39,6 +39,7 @@ class AddUserBottom extends StatelessWidget {
   final UploadImageCubit uploadImage;
   final PickImageCubit pickImage;
   final String? phoneNumber;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +51,7 @@ class AddUserBottom extends StatelessWidget {
       },
       child: CustomBottom(
           text: 'Continue',
+          isLoading: isLoading,
           colorBottom: kPrimaryColor,
           colorText: Colors.white,
           onPressed: () async {

@@ -22,6 +22,7 @@ class CustomPhoneNumberTextField extends StatelessWidget {
           top: size.width * .04),
       child: PhoneNumberTextField(
           size: size,
+          enabled: true,
           phoneNumber: controller,
           fillColor: Colors.white,
           hintText: 'Phone Number',

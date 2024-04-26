@@ -7,29 +7,35 @@ class AddUserGenderDropDown extends StatelessWidget {
       required this.size,
       required this.iconColor,
       required this.items,
-      required this.gender});
+      required this.gender,
+      required this.isLoading});
 
   final Size size;
   final Color iconColor;
   final List<String> items;
   final TextEditingController gender;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
+        top: isLoading ? size.width * .035 : 0.0,
         right: size.width * .015,
-        child: DropdownButton(
-            icon: Icon(FontAwesomeIcons.caretDown,
-                color: iconColor, size: size.width * .045),
-            items: items.map((item) {
-              return DropdownMenuItem(value: item, child: Text(item));
-            }).toList(),
-            onChanged: (value) {
-              if (value != null) {
-                gender.text = value;
-              }
-            },
-            underline: Container(),
-            borderRadius: BorderRadius.circular(size.width * .03)));
+        child: isLoading
+            ? Icon(FontAwesomeIcons.caretDown,
+                color: iconColor, size: size.width * .045)
+            : DropdownButton(
+                icon: Icon(FontAwesomeIcons.caretDown,
+                    color: iconColor, size: size.width * .045),
+                items: items.map((item) {
+                  return DropdownMenuItem(value: item, child: Text(item));
+                }).toList(),
+                onChanged: (value) {
+                  if (value != null) {
+                    gender.text = value;
+                  }
+                },
+                underline: Container(),
+                borderRadius: BorderRadius.circular(size.width * .03)));
   }
 }

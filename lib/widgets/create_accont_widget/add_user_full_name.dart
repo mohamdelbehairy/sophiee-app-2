@@ -3,14 +3,19 @@ import 'package:flutter/material.dart';
 
 class AddUserFullName extends StatelessWidget {
   const AddUserFullName(
-      {super.key, required this.size, required this.fullName});
+      {super.key,
+      required this.size,
+      required this.fullName,
+      required this.enabled});
 
   final Size size;
   final TextEditingController fullName;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
     return AddUserTextField(
+        enabled: enabled,
         size: size,
         hintText: 'Full Name',
         controller: fullName,

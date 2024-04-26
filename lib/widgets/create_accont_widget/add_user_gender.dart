@@ -3,10 +3,15 @@ import 'package:app/widgets/create_accont_widget/add_user_text_filed.dart';
 import 'package:flutter/material.dart';
 
 class AddUserGender extends StatefulWidget {
-  const AddUserGender({super.key, required this.size, required this.gender});
+  const AddUserGender(
+      {super.key,
+      required this.size,
+      required this.gender,
+      required this.enabled});
 
   final Size size;
   final TextEditingController gender;
+  final bool enabled;
 
   @override
   State<AddUserGender> createState() => _AddUserGenderState();
@@ -39,7 +44,6 @@ class _AddUserGenderState extends State<AddUserGender> {
     return Stack(
       children: [
         AddUserTextField(
-          enabled: false,
           size: widget.size,
           hintText: 'Gender',
           controller: widget.gender,
@@ -53,6 +57,7 @@ class _AddUserGenderState extends State<AddUserGender> {
           },
         ),
         AddUserGenderDropDown(
+            isLoading: widget.enabled,
             size: widget.size,
             iconColor: iconColor,
             items: items,

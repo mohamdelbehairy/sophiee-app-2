@@ -8,12 +8,13 @@ class ChooseProfileImage extends StatelessWidget {
       required this.isDark,
       required this.takePhoto,
       required this.choosePhoto,
-      required this.size});
+      required this.size, required this.isLoading});
 
   final bool isDark;
   final Function() takePhoto;
   final Function() choosePhoto;
   final Size size;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +24,15 @@ class ChooseProfileImage extends StatelessWidget {
         child: InkWell(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
-            onTap: () => showModalBottomSheet(
-                backgroundColor: isDark ? Color(0xff2b2c33) : Colors.white,
-                context: context,
-                builder: (context) => EditProfileImageBottomSheet(
-                    takePhoto: takePhoto, choosePhoto: choosePhoto)),
+            onTap: () {
+              if (isLoading) {
+                showModalBottomSheet(
+                    backgroundColor: isDark ? Color(0xff2b2c33) : Colors.white,
+                    context: context,
+                    builder: (context) => EditProfileImageBottomSheet(
+                        takePhoto: takePhoto, choosePhoto: choosePhoto));
+              }
+            },
             child: CircleAvatar(
                 backgroundColor: Colors.white,
                 radius: size.width * .045,

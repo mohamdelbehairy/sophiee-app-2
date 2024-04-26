@@ -4,10 +4,14 @@ import 'package:intl/intl.dart';
 
 class AddUserDateOfBirth extends StatefulWidget {
   const AddUserDateOfBirth(
-      {super.key, required this.size, required this.dateOfBirth});
+      {super.key,
+      required this.size,
+      required this.dateOfBirth,
+      required this.enabled});
 
   final Size size;
   final TextEditingController dateOfBirth;
+  final bool enabled;
 
   @override
   State<AddUserDateOfBirth> createState() => _AddUserDateOfBirthState();
@@ -47,18 +51,20 @@ class _AddUserDateOfBirthState extends State<AddUserDateOfBirth> {
       suffixIcon: Icon(Icons.calendar_month,
           size: widget.size.width * .05, color: iconColor),
       onTap: () {
-        showDatePicker(
-                context: context,
-                initialDate: DateTime.now(),
-                firstDate: DateTime(2000),
-                lastDate: DateTime(2025))
-            .then((value) {
-          if (value != null) {
-            DateFormat format = DateFormat('MM-dd-yyyy');
-            String formattedDate = format.format(value);
-            widget.dateOfBirth.text = formattedDate;
-          }
-        });
+        if (widget.enabled) {
+          showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(2025))
+              .then((value) {
+            if (value != null) {
+              DateFormat format = DateFormat('MM-dd-yyyy');
+              String formattedDate = format.format(value);
+              widget.dateOfBirth.text = formattedDate;
+            }
+          });
+        }
       },
       validator: (value) {
         if (value!.isEmpty) {

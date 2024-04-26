@@ -7,11 +7,12 @@ class AddUserPhoneNumber extends StatefulWidget {
       {super.key,
       required this.size,
       required this.phoneNumber,
-      required this.onChanged});
+      required this.onChanged, required this.enabled});
 
   final Size size;
   final TextEditingController phoneNumber;
   final Function(PhoneNumber) onChanged;
+  final bool enabled;
 
   @override
   State<AddUserPhoneNumber> createState() => _AddUserPhoneNumberState();
@@ -44,6 +45,7 @@ class _AddUserPhoneNumberState extends State<AddUserPhoneNumber> {
   @override
   Widget build(BuildContext context) {
     return PhoneNumberTextField(
+        enabled: widget.enabled,
         phoneNumber: widget.phoneNumber,
         size: widget.size,
         hintText: 'Phone Number',

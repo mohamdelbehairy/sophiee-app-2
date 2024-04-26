@@ -9,10 +9,14 @@ import 'package:image_picker/image_picker.dart';
 
 class AddUserProfileImage extends StatelessWidget {
   const AddUserProfileImage(
-      {super.key, required this.size, required this.pickImage});
+      {super.key,
+      required this.size,
+      required this.pickImage,
+      required this.enabled});
 
   final Size size;
   final PickImageCubit pickImage;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +39,7 @@ class AddUserProfileImage extends StatelessWidget {
           ),
           ChooseProfileImage(
               isDark: false,
+              isLoading: enabled,
               takePhoto: () async {
                 Navigator.pop(context);
                 await pickImage.pickImage(source: ImageSource.camera);

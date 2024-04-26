@@ -57,6 +57,7 @@ class EditProfileImage extends StatelessWidget {
         ),
         ChooseProfileImage(
             isDark: isDark,
+            isLoading: true,
             takePhoto: takePhoto,
             choosePhoto: choosePhoto,
             size: size)
