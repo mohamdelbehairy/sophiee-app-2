@@ -26,7 +26,7 @@ class _CustomCardTwoState extends State<CustomCardTwo> {
 
   void logOut() {
     var signOut = context.read<AuthSettingsCubit>();
-    if (widget.user.isGoogleAuth!) {
+    if (widget.user.isGoogleAuth != null) {
       signOut.googleSignOut();
       context.read<GoogleAuthCubit>().isLoading = false;
     } else {

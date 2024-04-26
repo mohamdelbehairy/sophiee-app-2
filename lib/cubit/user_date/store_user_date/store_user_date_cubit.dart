@@ -18,7 +18,9 @@ class StoreUserDateCubit extends Cubit<StoreUserDateState> {
       required String bio,
       required String gender,
       required String profileImage,
-      String? phoneNumber}) async {
+      String? phoneNumber,
+      bool? isEmailAuth
+      }) async {
     emit(StoreUserDateLoading(isLoading: true));
     try {
       UserModel userModel = UserModel.fromJson({
@@ -32,7 +34,8 @@ class StoreUserDateCubit extends Cubit<StoreUserDateState> {
         'profileImage': profileImage,
         'phoneNumber': phoneNumber,
         'onlineStatue': Timestamp.now(),
-        'isStory': false
+        'isStory': false,
+        'isEmailAuth':isEmailAuth
       });
       await FirebaseFirestore.instance
           .collection('users')

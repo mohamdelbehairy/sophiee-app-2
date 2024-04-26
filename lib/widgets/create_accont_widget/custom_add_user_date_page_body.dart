@@ -2,7 +2,6 @@ import 'package:app/cubit/pick_image/pick_image_cubit.dart';
 import 'package:app/cubit/upload/upload_image/upload_image_cubit.dart';
 import 'package:app/cubit/user_date/store_user_date/store_user_date_cubit.dart';
 import 'package:app/widgets/create_accont_widget/add_user_date_body_component.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CustomAddUserDataPageBody extends StatefulWidget {
@@ -29,8 +28,7 @@ class _CustomAddUserDataPageBodyState extends State<CustomAddUserDataPageBody> {
   TextEditingController nickName = TextEditingController();
   TextEditingController bio = TextEditingController();
   TextEditingController dateOfBirth = TextEditingController();
-  TextEditingController email =
-      TextEditingController(text: FirebaseAuth.instance.currentUser!.email);
+  TextEditingController email = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController gender = TextEditingController();
   GlobalKey<FormState> globalKey = GlobalKey();

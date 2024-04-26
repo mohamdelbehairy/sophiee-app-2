@@ -22,7 +22,6 @@ class CustomPhoneNumberTextField extends StatelessWidget {
           right: size.width * .08,
           top: size.width * .04),
       child: PhoneNumberTextField(
-         
           size: size,
           enabled: true,
           phoneNumber: controller,

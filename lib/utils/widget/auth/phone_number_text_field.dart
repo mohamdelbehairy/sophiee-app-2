@@ -21,7 +21,6 @@ class PhoneNumberTextField extends StatelessWidget {
   final Function(PhoneNumber) onChanged;
   final Color fillColor;
   final bool enabled;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,6 @@ class PhoneNumberTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(size.width * .02),
           child: IntlPhoneField(
               enabled: enabled,
-             
               onChanged: onChanged,
               initialCountryCode: 'EG',
               disableLengthCheck: disableLengthCheck,

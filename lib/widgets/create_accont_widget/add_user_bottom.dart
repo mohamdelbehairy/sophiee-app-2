@@ -1,10 +1,13 @@
 import 'package:app/constants.dart';
+import 'package:app/cubit/auth/google_auth/google_auth_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_state.dart';
 import 'package:app/cubit/upload/upload_image/upload_image_cubit.dart';
 import 'package:app/cubit/user_date/store_user_date/store_user_date_cubit.dart';
 import 'package:app/pages/create_account/verificaton_page.dart';
+import 'package:app/pages/home_page.dart';
 import 'package:app/utils/widget/custom_bottom.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
@@ -24,7 +27,8 @@ class AddUserBottom extends StatelessWidget {
       required this.uploadImage,
       required this.pickImage,
       required this.phoneNumber,
-      required this.phoneController, required this.isLoading});
+      required this.phoneController,
+      required this.isLoading});
 
   final GlobalKey<FormState> globalKey;
   final Size size;
@@ -43,6 +47,7 @@ class AddUserBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isUserDataStored = context.read<GoogleAuthCubit>();
     return BlocListener<PickImageCubit, PickImageStates>(
       listener: (context, state) {
         if (state is PickImageSucccess) {
@@ -66,19 +71,44 @@ class AddUserBottom extends StatelessWidget {
                 profileImage = defaultProfileImageUrl;
               }
 
-              await storeUserDate.storeUserData(
-                  emailAddress: email.text,
-                  userName: fullName.text,
-                  dateOfBirth: dateOfBirth.text,
-                  nickName: nickName.text,
-                  bio: bio.text,
-                  gender: gender.text,
-                  phoneNumber:
-                      phoneController.text.isNotEmpty ? phoneNumber! : null,
-                  profileImage: profileImage);
+              if (FirebaseAuth.instance.currentUser!.email != null) {
+                await storeUserDate.storeUserData(
+                    emailAddress: email.text.isNotEmpty
+                        ? email.text
+                        : FirebaseAuth.instance.currentUser!.email!,
+                    userName: fullName.text,
+                    dateOfBirth: dateOfBirth.text,
+                    nickName: nickName.text,
+                    bio: bio.text,
+                    gender: gender.text,
+                    isEmailAuth: true,
+                    phoneNumber:
+                        phoneController.text.isNotEmpty ? phoneNumber! : null,
+                    profileImage: profileImage);
 
-              getnav.Get.to(() => VerificationPage(isDark: false),
-                  transition: getnav.Transition.leftToRight);
+                getnav.Get.to(() => VerificationPage(isDark: false),
+                    transition: getnav.Transition.leftToRight);
+              }
+              if (FirebaseAuth.instance.currentUser!.phoneNumber != null &&
+                  !await isUserDataStored.isUserDataStored(
+                      userID: FirebaseAuth.instance.currentUser!.uid)) {
+                await storeUserDate.storeUserData(
+                    emailAddress: email.text,
+                    userName: fullName.text,
+                    dateOfBirth: dateOfBirth.text,
+                    nickName: nickName.text,
+                    bio: bio.text,
+                    gender: gender.text,
+                    phoneNumber: phoneController.text.isNotEmpty
+                        ? phoneNumber
+                        : FirebaseAuth.instance.currentUser!.phoneNumber,
+                    profileImage: profileImage);
+                getnav.Get.to(() => HomePage(),
+                    transition: getnav.Transition.leftToRight);
+              } else {
+                getnav.Get.to(() => HomePage(),
+                    transition: getnav.Transition.leftToRight);
+              }
             }
           },
           borderRadius: BorderRadius.circular(size.width * .08),

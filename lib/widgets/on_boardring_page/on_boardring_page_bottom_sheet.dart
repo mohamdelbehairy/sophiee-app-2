@@ -19,7 +19,7 @@ class OnBoardringPageBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: size.height * .14,
+      height: size.height * .15,
       width: size.width,
       decoration: BoxDecoration(
           color: kPrimaryColor, boxShadow: [BoxShadow(color: kPrimaryColor)]),

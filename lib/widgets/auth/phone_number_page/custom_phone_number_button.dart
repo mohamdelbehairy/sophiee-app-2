@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 
 class CustomPhoneNumberButton extends StatelessWidget {
   const CustomPhoneNumberButton(
-      {super.key, required this.size, required this.onPressed});
+      {super.key, required this.size, required this.onPressed, required this.isLoading});
   final Size size;
   final Function() onPressed;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return CustomBottom(
+      isLoading: isLoading,
         text: 'Send the code',
         margin: EdgeInsets.symmetric(horizontal: size.width * .08),
         colorBottom: Colors.white,
