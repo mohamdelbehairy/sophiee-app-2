@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart' as getnav;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomCardTwo extends StatefulWidget {
   const CustomCardTwo({super.key, required this.size, required this.user});
@@ -47,9 +48,12 @@ class _CustomCardTwoState extends State<CustomCardTwo> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthSettingsCubit, AuthSettingsState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is EmailSignOutSuccess || state is GoogleSignOutSuccess) {
           context.read<GetFriendsCubit>().emit(GetFriendsInitial());
+          final shar = await SharedPreferences.getInstance();
+          shar.setString('isFirstTimeUser', 'done');
+          print(shar.getString('isFirstTimeUser'));
         }
       },
       child: BlocBuilder<LoginCubit, LoginState>(

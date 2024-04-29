@@ -1,5 +1,6 @@
 import 'package:app/custom_material_app.dart';
 import 'package:app/firebase_options.dart';
+import 'package:app/pages/auth/provider_auth_page.dart';
 import 'package:app/pages/home_page.dart';
 import 'package:app/pages/on_boardring_page.dart';
 import 'package:app/services/theme.dart';
@@ -21,11 +22,14 @@ void main() async {
 _init() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   final token = prefs.getString('userID');
+  final isFirstTimeUser = prefs.getString('isFirstTimeUser');
   if (token != null &&
       (FirebaseAuth.instance.currentUser!.phoneNumber != null ||
           FirebaseAuth.instance.currentUser!.emailVerified)) {
     // UpdateUserOnline.checkOnline();
     return runApp(MyApp(screen: HomePage()));
+  } else if (token == null && isFirstTimeUser != null) {
+    return runApp(MyApp(screen: ProviderAuthPage()));
   } else {
     return runApp(MyApp(screen: OnBoardringPage()));
   }
@@ -52,20 +56,3 @@ class MyApp extends StatelessWidget {
         systemNavigationBarIconBrightness: Brightness.light));
   }
 }
-
-// _init() async {
-//   SharedPreferences prefs = await SharedPreferences.getInstance();
-//   final token = prefs.getString('userID');
-//   final isFirstTimeUser = prefs.getBool('isFirstTimeUser') ?? true;
-
-//   if (isFirstTimeUser) {
-//     prefs.setBool('isFirstTimeUser', false);
-//     return runApp(MyApp(screen: OnBoardringPage()));
-//   } else {
-//     if (token != null && FirebaseAuth.instance.currentUser!.emailVerified) {
-//       return runApp(MyApp(screen: HomePage()));
-//     } else {
-//       return runApp(MyApp(screen: ProviderAuthPage()));
-//     }
-//   }
-// }

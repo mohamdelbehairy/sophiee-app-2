@@ -23,7 +23,7 @@ class CustomProviderWay extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: size.height * .06,
+        height: isLoading ? size.height * 0.08 : size.height * .06,
         width: size.width,
         margin: EdgeInsets.only(
             right: size.width * .08, left: size.width * .08, top: top),

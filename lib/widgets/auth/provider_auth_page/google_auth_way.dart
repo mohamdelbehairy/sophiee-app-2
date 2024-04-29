@@ -33,7 +33,7 @@ class GoogleAuthWay extends StatelessWidget {
               final signInWithGoogle = context.read<GoogleAuthCubit>();
               await signInWithGoogle.signInWithGoogle();
             },
-            widget: Image.asset(googleIconUrl, width: size.height * .03));
+            widget: Image.asset(googleIconUrl, width: size.height * .035));
       },
     );
   }

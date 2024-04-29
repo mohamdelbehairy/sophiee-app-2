@@ -12,7 +12,9 @@ class PhoneNumberAuthCubit extends Cubit<PhoneNumberAuthState> {
     emit(PhoneNumberAuthLoading(isLoading: true));
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: phoneNumber,
-      verificationCompleted: (PhoneAuthCredential credential) async {},
+      verificationCompleted: (PhoneAuthCredential credential) async {
+        
+      },
       verificationFailed: (FirebaseAuthException e) {
         if (e.code == 'invalid-phone-number') {
           emit(
