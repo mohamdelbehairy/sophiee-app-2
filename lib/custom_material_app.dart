@@ -1,3 +1,4 @@
+import 'package:app/constants.dart';
 import 'package:app/cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 import 'package:app/cubit/auth/auth_settings/auth_settings_cubit.dart';
 import 'package:app/cubit/auth/google_auth/google_auth_cubit.dart';
@@ -122,6 +123,9 @@ class CustomMaterialApp extends StatelessWidget {
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
           return GetMaterialApp(
+            title: 'SophieeApp',
+            color: Colors.transparent,
+            
             debugShowCheckedModeBanner: false,
             theme: themeModeService.lightMode(context: context),
             darkTheme: themeModeService.darkMode(context: context),
