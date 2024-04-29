@@ -12,10 +12,12 @@ class OptPhoneNumberPageBody extends StatefulWidget {
       {super.key,
       required this.size,
       required this.phoneNumber,
-      required this.verifyPhoneNumber});
+      required this.verifyPhoneNumber,
+      required this.resendPhoneNumber});
 
   final Size size;
   final String phoneNumber;
+  final String resendPhoneNumber;
   final PhoneNumberAuthCubit verifyPhoneNumber;
 
   @override
@@ -62,7 +64,11 @@ class _OptPhoneNumberPageBodyState extends State<OptPhoneNumberPageBody> {
             },
             size: widget.size,
           ),
-          if (!isLoading) CustomOptResendCodetext(size: widget.size),
+          if (!isLoading)
+            CustomOptResendCodetext(
+                size: widget.size,
+                resendCode: widget.verifyPhoneNumber,
+                resendPhoneNumber: widget.resendPhoneNumber),
           if (isLoading) VerificationPageProgressIndicator(isDark: true),
         ]),
       ),

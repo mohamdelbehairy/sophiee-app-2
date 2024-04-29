@@ -21,7 +21,6 @@ void main() async {
 _init() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   final token = prefs.getString('userID');
-  
   if (token != null &&
       (FirebaseAuth.instance.currentUser!.phoneNumber != null ||
           FirebaseAuth.instance.currentUser!.emailVerified)) {

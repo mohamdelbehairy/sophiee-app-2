@@ -20,7 +20,7 @@ class AuthSettingsCubit extends Cubit<AuthSettingsState> {
     }
   }
 
-  Future<void> emailSignOut() async {
+  Future<void> signOut() async {
     emit(AuthSettingsLoading());
     try {
       await FirebaseAuth.instance.signOut();

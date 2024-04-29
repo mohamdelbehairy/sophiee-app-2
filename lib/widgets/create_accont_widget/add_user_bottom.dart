@@ -1,5 +1,4 @@
 import 'package:app/constants.dart';
-import 'package:app/cubit/auth/google_auth/google_auth_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_state.dart';
 import 'package:app/cubit/upload/upload_image/upload_image_cubit.dart';
@@ -11,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddUserBottom extends StatelessWidget {
   const AddUserBottom(
@@ -47,7 +47,6 @@ class AddUserBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var isUserDataStored = context.read<GoogleAuthCubit>();
     return BlocListener<PickImageCubit, PickImageStates>(
       listener: (context, state) {
         if (state is PickImageSucccess) {
@@ -59,60 +58,57 @@ class AddUserBottom extends StatelessWidget {
           isLoading: isLoading,
           colorBottom: kPrimaryColor,
           colorText: Colors.white,
-          onPressed: () async {
-            if (globalKey.currentState!.validate()) {
-              globalKey.currentState!.save();
-              String profileImage;
-              if (pickImage.selectedImage != null) {
-                profileImage = await uploadImage.uploadImage(
-                    imageFile: pickImage.selectedImage!,
-                    fieldName: 'user_images');
-              } else {
-                profileImage = defaultProfileImageUrl;
-              }
-
-              if (FirebaseAuth.instance.currentUser!.email != null) {
-                await storeUserDate.storeUserData(
-                    emailAddress: email.text.isNotEmpty
-                        ? email.text
-                        : FirebaseAuth.instance.currentUser!.email!,
-                    userName: fullName.text,
-                    dateOfBirth: dateOfBirth.text,
-                    nickName: nickName.text,
-                    bio: bio.text,
-                    gender: gender.text,
-                    isEmailAuth: true,
-                    phoneNumber:
-                        phoneController.text.isNotEmpty ? phoneNumber! : null,
-                    profileImage: profileImage);
-
-                getnav.Get.to(() => VerificationPage(isDark: false),
-                    transition: getnav.Transition.leftToRight);
-              }
-              if (FirebaseAuth.instance.currentUser!.phoneNumber != null &&
-                  !await isUserDataStored.isUserDataStored(
-                      userID: FirebaseAuth.instance.currentUser!.uid)) {
-                await storeUserDate.storeUserData(
-                    emailAddress: email.text,
-                    userName: fullName.text,
-                    dateOfBirth: dateOfBirth.text,
-                    nickName: nickName.text,
-                    bio: bio.text,
-                    gender: gender.text,
-                    phoneNumber: phoneController.text.isNotEmpty
-                        ? phoneNumber
-                        : FirebaseAuth.instance.currentUser!.phoneNumber,
-                    profileImage: profileImage);
-                getnav.Get.to(() => HomePage(),
-                    transition: getnav.Transition.leftToRight);
-              } else {
-                getnav.Get.to(() => HomePage(),
-                    transition: getnav.Transition.leftToRight);
-              }
-            }
-          },
+          onPressed: onPressedCustomBottom,
           borderRadius: BorderRadius.circular(size.width * .08),
           width: size.width),
     );
+  }
+
+  onPressedCustomBottom() async {
+    if (globalKey.currentState!.validate()) {
+      globalKey.currentState!.save();
+      String profileImage;
+      if (pickImage.selectedImage != null) {
+        profileImage = await uploadImage.uploadImage(
+            imageFile: pickImage.selectedImage!, fieldName: 'user_images');
+      } else {
+        profileImage = defaultProfileImageUrl;
+      }
+
+      if (FirebaseAuth.instance.currentUser!.email != null) {
+        await storeUserDate.storeUserData(
+            emailAddress: email.text.isNotEmpty
+                ? email.text
+                : FirebaseAuth.instance.currentUser!.email!,
+            userName: fullName.text,
+            dateOfBirth: dateOfBirth.text,
+            nickName: nickName.text,
+            bio: bio.text,
+            gender: gender.text,
+            isEmailAuth: true,
+            phoneNumber: phoneController.text.isNotEmpty ? phoneNumber! : null,
+            profileImage: profileImage);
+
+        getnav.Get.to(() => VerificationPage(isDark: false),
+            transition: getnav.Transition.leftToRight);
+      }
+      if (FirebaseAuth.instance.currentUser!.phoneNumber != null) {
+        await storeUserDate.storeUserData(
+            emailAddress: email.text,
+            userName: fullName.text,
+            dateOfBirth: dateOfBirth.text,
+            nickName: nickName.text,
+            bio: bio.text,
+            gender: gender.text,
+            phoneNumber: phoneController.text.isNotEmpty
+                ? phoneNumber
+                : FirebaseAuth.instance.currentUser!.phoneNumber,
+            profileImage: profileImage);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('userID', FirebaseAuth.instance.currentUser!.uid);
+        getnav.Get.to(() => HomePage(),
+            transition: getnav.Transition.leftToRight);
+      }
+    }
   }
 }

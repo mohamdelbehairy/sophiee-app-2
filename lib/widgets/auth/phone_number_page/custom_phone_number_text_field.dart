@@ -7,12 +7,12 @@ class CustomPhoneNumberTextField extends StatelessWidget {
       {super.key,
       required this.size,
       required this.onChanged,
-      required this.controller});
+      required this.controller, required this.enabled});
 
   final Size size;
   final Function(PhoneNumber) onChanged;
   final TextEditingController controller;
-
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class CustomPhoneNumberTextField extends StatelessWidget {
           top: size.width * .04),
       child: PhoneNumberTextField(
           size: size,
-          enabled: true,
+          enabled: enabled,
           phoneNumber: controller,
           fillColor: Colors.white,
           hintText: 'Phone Number',

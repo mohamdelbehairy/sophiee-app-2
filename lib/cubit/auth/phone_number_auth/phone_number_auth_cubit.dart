@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 part 'phone_number_auth_state.dart';
 
 class PhoneNumberAuthCubit extends Cubit<PhoneNumberAuthState> {
@@ -15,7 +14,19 @@ class PhoneNumberAuthCubit extends Cubit<PhoneNumberAuthState> {
       phoneNumber: phoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) async {},
       verificationFailed: (FirebaseAuthException e) {
-        emit(SendPhoneNumberAuthFailure(errorMessage: e.toString()));
+        if (e.code == 'invalid-phone-number') {
+          emit(
+              SendPhoneNumberAuthFailure(errorMessage: 'invalid-phone-number'));
+        } else if (e.code == 'too-many-requests') {
+          emit(SendPhoneNumberAuthFailure(errorMessage: 'too-many-requests'));
+        } else if(e.code == 'network-request-failed') {
+          emit(SendPhoneNumberAuthFailure(errorMessage: 'network-request-failed'));
+        }
+        
+         else {
+          emit(SendPhoneNumberAuthFailure(errorMessage: e.toString()));
+        }
+
         debugPrint(
             'error from sign in with phone number method: ${e.toString()}');
         isLoading = false;
@@ -35,8 +46,7 @@ class PhoneNumberAuthCubit extends Cubit<PhoneNumberAuthState> {
           verificationId: verificationID, smsCode: smsCode);
 
       await FirebaseAuth.instance.signInWithCredential(credential);
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('userID', FirebaseAuth.instance.currentUser!.uid);
+
       emit(VerifyPhoneNumberAuthSuccess());
     } catch (e) {
       emit(VerifyPhoneNumberAuthFailure(errorMessage: e.toString()));

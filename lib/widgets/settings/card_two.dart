@@ -24,13 +24,13 @@ class CustomCardTwo extends StatefulWidget {
 class _CustomCardTwoState extends State<CustomCardTwo> {
   bool showProgressIndicator = false;
 
-  void logOut() {
+  void logOut() async {
     var signOut = context.read<AuthSettingsCubit>();
     if (widget.user.isGoogleAuth != null) {
       signOut.googleSignOut();
       context.read<GoogleAuthCubit>().isLoading = false;
     } else {
-      signOut.emailSignOut();
+      signOut.signOut();
     }
 
     getnav.Get.to(() => ProviderAuthPage(),

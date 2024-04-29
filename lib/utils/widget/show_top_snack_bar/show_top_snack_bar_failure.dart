@@ -9,11 +9,14 @@ void showTopSnackBarFailure(
     Function()? onTap}) {
   return showTopSnackBar(
       Overlay.of(context),
+      // snackBarPosition :SnackBarPosition.bottom,
       GestureDetector(
         onTap: onTap,
         child: CustomSnackBar.error(
-            maxLines: maxLines ?? 2,
-            boxShadow: [BoxShadow(color: Colors.transparent)],
-            message: message),
+          maxLines: maxLines ?? 2,
+          boxShadow: [BoxShadow(color: Colors.transparent)],
+          message: message,
+          textStyle: TextStyle(fontSize: maxLines == 3 ? 12 : 16),
+        ),
       ));
 }

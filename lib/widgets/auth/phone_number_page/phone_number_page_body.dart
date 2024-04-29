@@ -1,5 +1,6 @@
 import 'package:app/cubit/auth/phone_number_auth/phone_number_auth_cubit.dart';
 import 'package:app/pages/auth/opt_phone_number_page.dart';
+import 'package:app/utils/widget/show_top_snack_bar/show_top_snack_bar_failure.dart';
 import 'package:app/widgets/auth/phone_number_page/phone_number_page_body_component.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,8 +39,35 @@ class _PhoneNumberPageBodyState extends State<PhoneNumberPageBody> {
         }
         if (state is SendPhoneNumberAuthSuccess) {
           getnav.Get.to(
-              () => OptPhoneNumberPage(size: widget.size, phoneNumber: number),
+              () => OptPhoneNumberPage(
+                  size: widget.size,
+                  phoneNumber: number,
+                  resendPhoneNumber: phoneNumber),
               transition: getnav.Transition.rightToLeft);
+        }
+        if (state is SendPhoneNumberAuthFailure) {
+          if (state.errorMessage == 'invalid-phone-number') {
+            showTopSnackBarFailure(
+                context: context,
+                maxLines: 3,
+                message:
+                    'Sorry, the provided phone number is not valid. Please double-check the number and try again.');
+          }
+          if (state.errorMessage == 'too-many-requests') {
+            showTopSnackBarFailure(
+                context: context,
+                maxLines: 3,
+                message:
+                    "Apologies, but we've blocked requests from your device temporarily due to unusual activity. Please try again later. Thank you for your understanding.");
+          } 
+           if (state.errorMessage == 'network-request-failed') {
+            showTopSnackBarFailure(
+                context: context,
+                maxLines: 3,
+                message:
+                    "Sorry, the network request failed. Please check your network connection and try again.");
+          } 
+          
         }
       },
       builder: (context, state) {

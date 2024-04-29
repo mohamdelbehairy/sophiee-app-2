@@ -38,7 +38,10 @@ class PhoneNumberPageBodyComponent extends StatelessWidget {
             secondtext:
                 'We need to register your phone\n before getting started!'),
         CustomPhoneNumberTextField(
-            size: size, controller: controller, onChanged: onChanged),
+            enabled: !isLoading,
+            size: size,
+            controller: controller,
+            onChanged: onChanged),
         CustomPhoneNumberButton(
             size: size,
             isLoading: isLoading,

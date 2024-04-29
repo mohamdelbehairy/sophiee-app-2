@@ -30,6 +30,8 @@ class PhoneNumberTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(size.width * .02),
           child: IntlPhoneField(
               enabled: enabled,
+            
+              flagsButtonPadding: EdgeInsets.only(left: !enabled ? 28 : 0),
               onChanged: onChanged,
               initialCountryCode: 'EG',
               disableLengthCheck: disableLengthCheck,

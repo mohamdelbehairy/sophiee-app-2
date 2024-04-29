@@ -1,6 +1,8 @@
 import 'package:app/constants.dart';
+import 'package:app/cubit/auth/google_auth/google_auth_cubit.dart';
 import 'package:app/cubit/auth/phone_number_auth/phone_number_auth_cubit.dart';
 import 'package:app/pages/create_account/add_user_data_page.dart';
+import 'package:app/pages/home_page.dart';
 import 'package:app/widgets/auth/opt_phone_number_page/opt_phone_number_page_body.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,12 +11,17 @@ import 'package:get/get.dart' as getnav;
 
 class OptPhoneNumberPage extends StatelessWidget {
   const OptPhoneNumberPage(
-      {super.key, required this.size, required this.phoneNumber});
+      {super.key,
+      required this.size,
+      required this.phoneNumber,
+      required this.resendPhoneNumber});
   final Size size;
   final String phoneNumber;
+  final String resendPhoneNumber;
 
   @override
   Widget build(BuildContext context) {
+    var isUserDataStored = context.read<GoogleAuthCubit>();
     var verifyPhoneNumber = context.read<PhoneNumberAuthCubit>();
     return Scaffold(
         backgroundColor: Colors.white,
@@ -25,8 +32,14 @@ class OptPhoneNumberPage extends StatelessWidget {
               print(
                   'isVerified: ${FirebaseAuth.instance.currentUser!.phoneNumber}');
               await Future.delayed(const Duration(seconds: 3));
-              getnav.Get.to(() => AddUserDataPage(),
-                  transition: getnav.Transition.rightToLeft);
+              if (!await isUserDataStored.isUserDataStored(
+                  userID: FirebaseAuth.instance.currentUser!.uid)) {
+                getnav.Get.to(() => AddUserDataPage(),
+                    transition: getnav.Transition.rightToLeft);
+              } else {
+                getnav.Get.to(() => HomePage(),
+                    transition: getnav.Transition.rightToLeft);
+              }
             }
           },
           builder: (context, state) {
@@ -44,6 +57,7 @@ class OptPhoneNumberPage extends StatelessWidget {
                       kPrimaryColor
                     ])),
                 child: OptPhoneNumberPageBody(
+                    resendPhoneNumber: resendPhoneNumber,
                     verifyPhoneNumber: verifyPhoneNumber,
                     size: size,
                     phoneNumber: phoneNumber));
