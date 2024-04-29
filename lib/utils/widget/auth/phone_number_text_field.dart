@@ -30,7 +30,6 @@ class PhoneNumberTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(size.width * .02),
           child: IntlPhoneField(
               enabled: enabled,
-            
               flagsButtonPadding: EdgeInsets.only(left: !enabled ? 28 : 0),
               onChanged: onChanged,
               initialCountryCode: 'EG',
@@ -40,7 +39,7 @@ class PhoneNumberTextField extends StatelessWidget {
               dropdownTextStyle: TextStyle(color: dropDownColor),
               style: TextStyle(
                   color: Colors.black,
-                  fontWeight: FontWeight.w100,
+                  fontWeight: FontWeight.w300,
                   fontSize: size.width * .035),
               decoration: InputDecoration(
                   border: InputBorder.none,
